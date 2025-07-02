@@ -1,8 +1,4 @@
-// src/collections/ProgrammingLanguages.ts
 import type { CollectionConfig } from 'payload'
-// import { LanguageTutorials } from '../components/LanguageTutorials'
-// import { LanguageExercises } from '../components/LanguageExercises'
-// import LanguageDashboard from '@/components/LanguageDashboard'
 
 const ProgrammingLanguages: CollectionConfig = {
   slug: 'programming-languages',
