@@ -1,28 +1,20 @@
-import type { CollectionConfig } from 'payload';
+// src/collections/ProgrammingLanguages.ts
+import type { CollectionConfig } from 'payload'
+// import { LanguageTutorials } from '../components/LanguageTutorials'
+// import { LanguageExercises } from '../components/LanguageExercises'
+// import LanguageDashboard from '@/components/LanguageDashboard'
 
-const ProgrammingLanguage: CollectionConfig = {
+const ProgrammingLanguages: CollectionConfig = {
   slug: 'programming-languages',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'index'],
   },
   fields: [
-    {
-      name: 'index',
-      type: 'number',
-      unique: true,
-    },
-    {
-      name: 'title',
-      type: 'text',
-    },
-    {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
-    },
+    { name: 'title', type: 'text', required: true },
+    { name: 'index', type: 'number', required: true, unique: true },
+    { name: 'slug', type: 'text', required: true, unique: true },
+    { name: 'logo', type: 'upload', relationTo: 'media' },
   ],
   timestamps: false,
-};
-
-export default ProgrammingLanguage;
+}
+export default ProgrammingLanguages

@@ -1,31 +1,49 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload'
 
-const Tutorial: CollectionConfig = {
+const Tutorials: CollectionConfig = {
   slug: 'tutorials',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'index', 'programmingLanguage'],
+    components: {
+      beforeList: [
+        {
+          path: 'src/components/Tutorials/LanguageTabs',
+        },
+      ],
+    },
   },
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
       name: 'index',
       type: 'number',
+      required: true,
       unique: true,
     },
     {
-      name: 'title',
+      name: 'slug',
       type: 'text',
+      required: true,
+      unique: true,
     },
     {
       name: 'programmingLanguage',
       type: 'relationship',
       relationTo: 'programming-languages',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
       name: 'content',
       type: 'textarea',
     },
   ],
-};
+}
 
-export default Tutorial;
+export default Tutorials

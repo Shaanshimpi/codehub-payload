@@ -1,10 +1,17 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload'
 
 const Exercise: CollectionConfig = {
   slug: 'exercises',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'index', 'programmingLanguage', 'topic', 'difficultyLevel'],
+    defaultColumns: ['title', 'index', 'programmingLanguage', 'tutorial', 'difficultyLevel'],
+    components: {
+      beforeList: [
+        {
+          path: 'src/components/Tutorials/ExerciseLanguageAndTutorialTabs',
+        },
+      ],
+    },
   },
   fields: [
     {
@@ -15,6 +22,13 @@ const Exercise: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
+      required: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
     },
     {
       name: 'videoLink',
@@ -22,7 +36,7 @@ const Exercise: CollectionConfig = {
     },
     {
       name: 'hints',
-      type: 'textarea'
+      type: 'textarea',
     },
     {
       name: 'code',
@@ -50,24 +64,27 @@ const Exercise: CollectionConfig = {
       name: 'programmingLanguage',
       type: 'relationship',
       relationTo: 'programming-languages',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
-    // {
-    //   name: 'topic',
-    //   type: 'relationship',
-    //   relationTo: 'topics',
-    //   required: true,
-    //   filterOptions: ({ relationTo, data }) => {
-    //     if (relationTo === 'topics' && data?.programmingLanguage) {
-    //       return {
-    //         programmingLanguage: {
-    //           equals: data.programmingLanguage,
-    //         },
-    //       };
-    //     }
-    //     return {};
-    //   },
-    // },
+    {
+      name: 'tutorial',
+      type: 'relationship',
+      relationTo: 'tutorials',
+      required: true,
+      admin: {
+        position: 'sidebar',
+        condition: (data) => Boolean(data.programmingLanguage),
+      },
+      filterOptions: ({ data }) => ({
+        programmingLanguage: {
+          equals: data?.programmingLanguage,
+        },
+      }),
+    },
   ],
-};
+}
 
-export default Exercise;
+export default Exercise
