@@ -22,7 +22,6 @@ const Tutorials: CollectionConfig = {
       name: 'index',
       type: 'number',
       required: true,
-      unique: true,
     },
     {
       name: 'slug',
