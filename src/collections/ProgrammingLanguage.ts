@@ -3,7 +3,16 @@ import type { CollectionConfig } from 'payload'
 const ProgrammingLanguages: CollectionConfig = {
   slug: 'programming-languages',
   access: {
-    read: () => true,
+    read: ({ req }) => {
+      const origin = req.headers.origin || req.headers.referer || ''
+      const allowedOrigins = [
+        'https://codehubindia.com',
+        'https://www.codehubindia.com',
+        'http://localhost:3000', // for development
+        'http://localhost:3001', // for development
+      ]
+      return allowedOrigins.some((url) => origin.startsWith(url))
+    },
   },
   admin: {
     useAsTitle: 'title',
@@ -16,4 +25,5 @@ const ProgrammingLanguages: CollectionConfig = {
   ],
   timestamps: false,
 }
+
 export default ProgrammingLanguages
