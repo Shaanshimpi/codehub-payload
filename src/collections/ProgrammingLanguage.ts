@@ -4,16 +4,12 @@ const ProgrammingLanguages: CollectionConfig = {
   slug: 'programming-languages',
   access: {
     read: ({ req }) => {
-      const origin = req.headers.origin || req.headers.referer || ''
-      const allowedOrigins = [
-        'https://codehubindia.com',
-        'https://www.codehubindia.com',
-        'http://localhost:3000', // for development
-        'http://localhost:3001', // for development
-      ]
-      return allowedOrigins.some((url) => origin.startsWith(url))
+      const allowedHosts = ['localhost:3000', 'codehubindia.in'] // your frontend domains
+      const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || ''
+      return allowedHosts.includes(host)
     },
   },
+
   admin: {
     useAsTitle: 'title',
   },
