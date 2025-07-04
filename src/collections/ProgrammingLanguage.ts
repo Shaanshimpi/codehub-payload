@@ -2,6 +2,9 @@ import type { CollectionConfig } from 'payload'
 
 const ProgrammingLanguages: CollectionConfig = {
   slug: 'programming-languages',
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
   },
